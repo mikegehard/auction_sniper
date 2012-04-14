@@ -3,7 +3,10 @@ Feature: Joining an auction
     Given there is an open auction
     When I go to the AuctionSniper
     And I join the open auction
-    Then I should be alerted that I have joined the auction
+    Then the sniper status should be "Joining Auction"
+
+    When I have successfully joined the auction
+    Then the sniper status should be "Joined Auction"
 
     When the open auction closes
-    Then I should be alerted that I have lost the auction
+    Then the sniper status should be "Lost Auction"
