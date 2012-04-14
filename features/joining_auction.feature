@@ -1,4 +1,5 @@
 Feature: Joining an auction
+  @javascript
   Scenario: Joining an auction and losing without bidding
     Given there is an open auction
     When I go to the AuctionSniper
