@@ -1,5 +1,5 @@
 require 'capybara/cucumber'
 
-require File.dirname(__FILE__) + '/../../auction_sniper'
+require File.dirname(__FILE__) + '/../../app/auction_sniper'
 
-Capybara.app = Sinatra::Application
+Capybara.app = AuctionSniper
