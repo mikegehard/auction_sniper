@@ -19,4 +19,8 @@ class AuctionSniper < Sinatra::Base
     haml :index
   end
 
+  get '/test_auction_server' do
+    haml :test_auction_server
+  end
+
 end
