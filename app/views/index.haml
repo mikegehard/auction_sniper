@@ -1,14 +1,17 @@
 !!! 5
+%html
+  %head
+    %title Auction Sniper
+    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", :type => "text/javascript"}
+    %script{:src => "/javascript/auctionSniper.js", :type => "text/javascript"}
 
-%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", :type => "text/javascript"}
-%script{:src => "/javascript/auctionSniper.js", :type => "text/javascript"}
+%body
+  %button#join{:type => "button"} Join Auction
 
-%button#join{:type => "button"} Join Auction
+  #status
 
-#status
-
-:javascript
-  $(document).ready(function() {
-    auctionSniper.initialize();
-  });
+  :javascript
+    $(document).ready(function() {
+      auctionSniper.initialize();
+    });
 
