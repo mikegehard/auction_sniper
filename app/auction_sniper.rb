@@ -20,7 +20,3 @@ class AuctionSniper < Sinatra::Base
   end
 
 end
-
-AuctionSniper.run! :port => 4567
-
-
