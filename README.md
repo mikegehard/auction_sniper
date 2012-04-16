@@ -9,9 +9,5 @@ Ruby 1.9.3
 The Bundler gem
 The latest version of Chrome or Firefox because the project uses websockets.
 
-#Installation
-1. Clone the repo
-1. `bundle exec`
-
-#Fuctionality
-See Cucumber featurest in the /features directory
+#Following along
+There is a branch for each chapter of the of the book. If you would like to follow along from start to finish, please look at the branches in order.
