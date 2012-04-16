@@ -8,20 +8,24 @@ class TestAuctionServer
   end
 
   def start
-    @thread = Thread.new do
-      EventMachine.run do
-        EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 9393, :debug => true) do |ws|
-          ws.onopen do
-            sleep 1
-            ws.send "Hello:"
-          end
-          ws.onmessage do |msg|
-            ws.send(process_message msg)
-          end
-          ws.onclose { puts "WebSocket closed" }
-          ws.onerror { |e| puts "Error: #{e.message}" }
+    EventMachine.run do
+      EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 9393, :debug => true) do |ws|
+        ws.onopen do
+          sleep 1
+          ws.send "Hello:"
         end
+        ws.onmessage do |msg|
+          ws.send(process_message msg)
+        end
+        ws.onclose { puts "WebSocket closed" }
+        ws.onerror { |e| puts "Error: #{e.message}" }
       end
+    end
+  end
+
+  def start_in_thread
+    @thread = Thread.new do
+      start
     end
   end
 
