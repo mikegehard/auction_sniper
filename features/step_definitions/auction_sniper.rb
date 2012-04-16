@@ -7,3 +7,9 @@ end
 Then /^the sniper status should be "([^"]*)"$/ do |status|
   page.find_by_id('status').should have_content(status)
 end
+When /^the AuctionSniper is connected to the auction server$/ do
+  wait_until { !page.find_by_id("connecting").visible? }
+end
+Then /^the AuctionSniper should connect to the auction server$/ do
+  page.find_by_id('connecting').should be_visible
+end

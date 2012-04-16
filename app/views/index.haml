@@ -2,16 +2,24 @@
 %html
   %head
     %title Auction Sniper
+    %link{:rel => "stylesheet", :href => "/css/auctionSniper.css"}
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", :type => "text/javascript"}
+    %script{:src => "/javascript/auctionServer.js", :type => "text/javascript"}
     %script{:src => "/javascript/auctionSniper.js", :type => "text/javascript"}
 
 %body
-  %button#join{:type => "button"} Join Auction
+  #auctionSniper
+    #connecting
+      %p Connecting to Server...
+    #controls
+      %button#join{:type => "button"} Join Auction
 
-  #status
+    #status
 
   :javascript
     $(document).ready(function() {
+      var auctionServer = new AuctionServer("localhost:9393");
+      var auctionSniper = new AuctionSniper(auctionServer);
       auctionSniper.initialize();
     });
 

@@ -1,8 +1,20 @@
 class AuctionSniper
-  initialize: ->
-    $('#join').click ->
-      $('#status').text("Joining Auction")
+  constructor: (@auctionServer) ->
 
-window.auctionSniper = new AuctionSniper
+  showControls: ->
+    $('#controls').show()
+    $('#connecting').hide()
+
+  setStatus: (newStatus) ->
+    $('#status').text(newStatus)
+
+  initialize: ->
+    $('#auctionSniper').show()
+    @auctionServer.connect(@showControls);
+    $('#join').click =>
+      @setStatus "Joining Auction"
+      @auctionServer.joinAuction("12345", => @setStatus("Joined Auction"))
+
+window.AuctionSniper = AuctionSniper
 
 
