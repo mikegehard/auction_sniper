@@ -4,11 +4,6 @@ Given /^there is an open auction$/ do
   @test_server.start_in_thread
 end
 
-Then /^the auction server should receive my join request$/ do
-  sleep 60
-  @test_server.auction_joined?.should be_true
-end
-
 When /^I have successfully joined the auction$/ do
   # This doesn't do anything and is simply added for readability of the
   # Cucumber scenario.
