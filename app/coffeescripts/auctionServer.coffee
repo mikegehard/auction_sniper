@@ -8,8 +8,9 @@ class AuctionServer
     @ws.onmessage = (evt) =>
       @processMessage evt.data
 
-  joinAuction: (client_id, joinedCallback) ->
+  joinAuction: (client_id, joinedCallback, closedCallback) ->
     @callbacks.joined = joinedCallback
+    @callbacks.closed = closedCallback
     @ws.send("Join:#{client_id}")
 
 
@@ -19,5 +20,6 @@ class AuctionServer
     switch message
       when "Hello:" then @callbacks.connected()
       when "Successfully Joined:" then @callbacks.joined()
+      when "AuctionClosed:" then @callbacks.closed()
 
 window.AuctionServer = AuctionServer

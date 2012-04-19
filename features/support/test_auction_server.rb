@@ -3,13 +3,13 @@ require 'em-websocket'
 
 class TestAuctionServer
   def initialize
-    @auction_started = false
     @participants = []
   end
 
   def start
     EventMachine.run do
       EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 9393, :debug => true) do |ws|
+        @ws = ws
         ws.onopen do
           sleep 1
           ws.send "Hello:"
@@ -35,11 +35,10 @@ class TestAuctionServer
   end
 
   def start_auction
-    @auction_started = true
   end
 
   def close_auction
-    @auction_started = false
+    @ws.send "AuctionClosed:"
   end
 
   def auction_joined?

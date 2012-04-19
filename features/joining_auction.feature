@@ -11,6 +11,6 @@ Feature: Joining an auction
 
     When I have successfully joined the auction
     Then the sniper status should be "Joined Auction"
-#
-#    When the auction closes
-#    Then the sniper status should be "Lost Auction"
+
+    When the auction closes
+    Then the sniper status should be "Lost Auction"
