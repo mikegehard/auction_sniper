@@ -13,3 +13,10 @@ end
 Then /^the AuctionSniper should connect to the auction server$/ do
   page.find_by_id('connecting').should be_visible
 end
+When /^I successfully join the open auction$/ do
+  steps %Q{
+    When the AuctionSniper is connected to the auction server
+    When I join the open auction
+    Then the auction should know that I have joined
+  }
+end

@@ -1,9 +1,9 @@
 require 'em-websocket'
 
-
 class TestAuctionServer
   def initialize
     @participants = []
+    @bids = []
   end
 
   def start
@@ -15,7 +15,7 @@ class TestAuctionServer
           ws.send "Hello:"
         end
         ws.onmessage do |msg|
-          ws.send(process_message msg)
+          process_message msg
         end
         ws.onclose { puts "WebSocket closed" }
         ws.onerror { |e| puts "Error: #{e.message}" }
@@ -45,15 +45,25 @@ class TestAuctionServer
     @participants.length == 1
   end
 
-  private
-  def process_message(message)
-    #assume that you will always get a join message (Join:<participant_id>)
-    participant_id = message.split(':').last
-    @participants << participant_id
-    # simulate a little delay in the connection
-    sleep 1
-    "Successfully Joined:"
+  def received_bid?(bid_amount)
+    @bids.include? bid_amount
   end
 
+  def report_current_price(current_price, minimum_bid, current_winning_bidder)
+    begin
+      puts "Waiting for auction to be joined"
+    end until auction_joined?
+    @ws.send("Price:#{current_price}:#{minimum_bid}:#{current_winning_bidder}")
+  end
 
+  private
+  def process_message(message)
+    message_payload = message.split(':').last
+    case message
+      when /^Join/
+        @participants << message_payload
+      else
+        @bids << message_payload.to_i
+    end
+  end
 end
