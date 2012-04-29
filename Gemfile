@@ -12,4 +12,7 @@ group :test do
   gem "guard-cucumber", "~> 0.7.5"
   gem "capybara", "~> 1.1.2"
   gem 'capybara-firebug', '~> 1.1.0'
+  gem "jasmine", "~> 1.2.0.rc3"
+  gem 'guard-coffeescript', "~> 0.6.0"
+  gem "guard-jasmine", "~> 1.1.1"
 end
