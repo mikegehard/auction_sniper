@@ -6,7 +6,7 @@ Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "features --format pretty"
 end
 
-task :default => [:features]
+task :default => [:features, 'jasmine:ci']
 
 begin
   require 'jasmine'
