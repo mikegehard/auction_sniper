@@ -1,27 +1,27 @@
 class AuctionSniper
-  constructor: (@auctionServer) ->
+  constructor: () ->
 
   showControls: ->
     $('#controls').show()
     $('#connecting').hide()
 
-  setStatus: (newStatus) ->
+  setStatus: (newStatus) =>
     $('#status').text(newStatus)
 
-  placeBid: (currentPrice, minimumBid) ->
+  placeBid: (currentPrice, minimumBid) =>
     bid = currentPrice + minimumBid
     @setStatus("Bidding $#{bid}")
     @auctionServer.sendBid(bid)
 
-  auctionClosed: ->
+  auctionClosed: =>
     @setStatus("Lost Auction")
 
-  initialize: ->
+  initialize: (@auctionServer) ->
     $('#auctionSniper').show()
-    @auctionServer.connect(@showControls);
+    @auctionServer.connect()
     $('#join').click =>
       @setStatus "Joined Auction"
-      @auctionServer.joinAuction("12345", ((currentPrice, minimumBid) => @placeBid(currentPrice, minimumBid)), ( => @auctionClosed()))
+      @auctionServer.joinAuction("12345")
 
 window.AuctionSniper = AuctionSniper
 

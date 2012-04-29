@@ -6,6 +6,7 @@
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", :type => "text/javascript"}
     %script{:src => "/javascript/auctionServer.js", :type => "text/javascript"}
     %script{:src => "/javascript/auctionSniper.js", :type => "text/javascript"}
+    %script{:src => "/javascript/auctionMessageProcessor.js", :type => "text/javascript"}
 
 %body
   #auctionSniper
@@ -18,8 +19,14 @@
 
   :javascript
     $(document).ready(function() {
-      var auctionServer = new AuctionServer("localhost:9393");
-      var auctionSniper = new AuctionSniper(auctionServer);
-      auctionSniper.initialize();
+      var auctionSniper = new AuctionSniper();
+      var callbacks = {
+        connected: auctionSniper.showControls ,
+        closed: auctionSniper.auctionClosed,
+        priceReceived: auctionSniper.placeBid
+      };
+      var messageProcessor = new AuctionMessageProcessor(callbacks);
+      var auctionServer = new AuctionServer("localhost:9393", messageProcessor);
+      auctionSniper.initialize(auctionServer);
     });
 

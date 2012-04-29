@@ -6,4 +6,5 @@
 
 .idea/
 .sass-cache/
-spec/javascripts/*_spec.js
+spec/javascripts/*Spec.js
+app/javascripts/*.js
